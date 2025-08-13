@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-alpha
+  labels:
+    app: app-alpha
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-alpha
+  template:
+    metadata:
+      labels:
+        app: app-alpha
+    spec:
+      containers:
+      - name: app-alpha
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html
+        configMap:
+          name: app-alpha-html
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-alpha-html
+data:
+  index.html: |
+    <h1>Hello from App Alpha</h1>
