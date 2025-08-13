@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1gamma1
+kind: Application
+metadata:
+  name: app-gamma
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/OpenUpskill/ou_app_of_apps.git'
+    targetRevision: main
+    path: apps/app-gamma
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
