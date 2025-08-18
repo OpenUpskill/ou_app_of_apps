@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: apps/app-beta
   destination:
-    server: https://kubernetes.default.svc
+    server: https://k3d-production:6443
     namespace: default
   syncPolicy:
     automated:
